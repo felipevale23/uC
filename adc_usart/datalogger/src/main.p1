@@ -1,0 +1,31 @@
+Version 3.2 HI-TECH Software Intermediate Code
+"1246 /opt/microchip/xc8/v2.36/pic/include/proc/pic16f887.h
+[v _ADCON0 `Vuc ~T0 @X0 0 e@31 ]
+"2978
+[v _ADCON1 `Vuc ~T0 @X0 0 e@159 ]
+"1239
+[v _ADRESH `Vuc ~T0 @X0 0 e@30 ]
+"2971
+[v _ADRESL `Vuc ~T0 @X0 0 e@158 ]
+"36 I2C_LCD.h
+[v _I2C1_open `(i ~T0 @X0 0 ef ]
+"37
+[v _I2C1_start `(i ~T0 @X0 0 ef ]
+"38
+[v _I2C1_sendData `(i ~T0 @X0 0 ef ]
+"26
+[v _LCD_ADDR `uc ~T0 @X0 0 e ]
+"59
+[v _I2C1_stop `(i ~T0 @X0 0 ef ]
+"60
+[v _I2C1_close `(i ~T0 @X0 0 ef ]
+"62
+[v _delay_ms `(i ~T0 @X0 0 ef ]
+"75
+[v _Delay_ms `(i ~T0 @X0 0 ef ]
+"124
+[v _I2C1_Stop `(i ~T0 @X0 0 ef ]
+"1134 /opt/microchip/xc8/v2.36/pic/include/proc/pic16f887.h
+[v _TXREG `Vuc ~T0 @X0 0 e@25 ]
+"2643
+[v _SPBRG `Vuc ~T0 @X0 0 e@153 ]

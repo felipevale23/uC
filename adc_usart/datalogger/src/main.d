@@ -1,0 +1,1 @@
+ main.d  main.p1:  main.c functions.h I2C_LCD.h registers.h config.h EUSART.h ADC.h

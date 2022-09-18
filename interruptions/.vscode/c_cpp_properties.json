@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/opt/microchip/xc8/v2.36/pic/include/*",
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/01/src/*"
+            ],
+            "defines": [],
+            "compilerPath": "/opt/microchip/xc8/v2.36/bin/xc8",
+            "cStandard": "c99",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}

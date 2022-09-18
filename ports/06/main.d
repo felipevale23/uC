@@ -1,0 +1,1 @@
+ main.d  main.p1:  src/main.c src/config.h src/I2C_LCD.h src/functions.h src/I2C.h

@@ -22,12 +22,15 @@ unsigned char txt2[] = "OFF   ";
 unsigned char txt3[] = "ON   ";
 unsigned char txt4[] = "PAUSE    ";
 unsigned char txt5[] = " TIMER ";
+unsigned char txt6[] = "SONECA ZzZ";
+unsigned char txt7[] = "ACORDA!!!";
 
 extern int count;
-unsigned char horas, minutos, segundos;
+extern unsigned char horas, minutos, segundos;
 unsigned char start, aux0, aux1, aux2, aux3, aux4;
 
-void init(){
+void init()
+{
 
     I2C1_Init(100000); // initialize I2C communication
     I2C_Lcd_Init();
@@ -44,34 +47,42 @@ void init(){
 
 void registers()
 {
-    // Configuração de Interrupção
-    GIE=1;
-    TMR0IE=1;
-    TMR0IF=0;
 
-    //Configuração do TIMER 0
-    //OPTION_REGbits.TMR0CS=0; // como temporizador
+    // Configuração do Registrador INTCON
+    GIE = 1;                     // Habilitação geral das interrupções
+    PEIE = 1;                    // Habilitação dos periféricos
+    INTE = 1;                    // Habilitação de interrupção externa
+
+    // Configuração do Registrador OPTION_REG
     nRBPU = 1;
-    INTEDG = 0;
+    INTEDG = 1;                 //interrupção externa por borda de subida
     T0CS = 0;
     T0SE=0;   
-    PSA=0;      // prescaler
-    OPTION_REGbits.PS=0b001;   // 1:4
-    //OPTION_REG = 0x81;       // configura timer0 prescaler 1:4 
+    PSA=0;      
+    OPTION_REGbits.PS=0b001;    // configura timer0 prescaler 1:4 
+    //OPTION_REG = 0x81;        // configura timer0 prescaler 1:4 
+
+    //Configuração do TIMER 0
     TMR0 = 0x06;
+    TMR0IE=1;
+    TMR0IF=0;
+    
+    ANSEL = 0;                  // Configura os pinos AN analógicos como digitais
+    ANSELH = 0;                 // Configura os pinos AN analógicos como digitais
+    C1ON = 0;                   // Desabilita os comparadores
+    C2ON = 0;                   // Desabilita os comparadores
 
-    ANSEL = 0;                 // Configura os pinos AN analógicos como digitais
-    ANSELH = 0;
-    C1ON = 0;
-    C2ON = 0;
-
+    // Configuração do Registrador PORTs
     TRISA = 0x3F; 
-    TRISB = 0x00;
+    TRISB = 0x01;               // Pino 0 da porta B como input
     PORTA = 0;
     PORTB = 0;
 
+    // Zerando variáveis
     start = aux0 = aux1 = aux2 = aux3 =  aux4 = 0;
     RA0 = RA1 = RA2 = 0;
+    INTF = 0;
+    T0IF = 0;
 
 }
 
@@ -126,7 +137,18 @@ void setHours()
     }
 }
 
-void showDisplay(){
+void setBuzzer()
+{
+
+    RB6 = 1;              // Liga Buzzer por 1,5s 
+    I2C_Lcd_Out(1, 8, txt7);  // escreve ACORDAAA     
+    __delay_ms(1500);
+    RB6 = 0;
+
+}
+
+void showDisplay()
+{
 
     I2C_Lcd_Cmd(_LCD_CURSOR_OFF);
     I2C_Lcd_Out(1, 1, txt5);
@@ -141,7 +163,8 @@ void showDisplay(){
 
 }
 
-void setCounter(){
+void setCounter()
+{
 
     if (count >= 5000)
     {
@@ -157,9 +180,7 @@ void setCounter(){
                 start = 0;                    // Desliga temporizador
                 RB7 = 0;                      // Desliga LED1
                 I2C_Lcd_Out(1, 8, txt2);      // escreve OFF ao final da contagem do tempo
-                RB3 = 1;                      // Liga Buzzer por 3s
-                __delay_ms(3000);
-                RB3 = 0;
+                setBuzzer();
 
             }else{ 
 
@@ -186,7 +207,8 @@ void setCounter(){
     }
 }
 
-void start_pause(){
+void start_pause()
+{
 
     if (!RA3)
     {
@@ -221,7 +243,8 @@ void start_pause(){
 
 }
 
-void clear(){
+void clear()
+{
 
     if(!RA4)
     {
@@ -238,7 +261,8 @@ void clear(){
  
 }
 
-void setDisplay(){
+void setDisplay()
+{
 
     setCounter();
     setSeconds();

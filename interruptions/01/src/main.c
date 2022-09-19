@@ -21,6 +21,7 @@ char LCD_ADDR = 0x4E;
 
 // Variaveis
 int count;
+unsigned char horas, minutos, segundos;
 
 // Protótipos das funções;
 void init();
@@ -28,6 +29,7 @@ void registers();
 void setSeconds();
 void setMinutes();
 void setHours();
+void setBuzzer();
 void showDisplay();
 void setCounter();
 void start_pause();
@@ -39,8 +41,16 @@ void __interrupt() isr (void)
 {
 
     count++;
-    TMR0 = 0x06;  // Carrega o valor do tempo 
-    T0IF = 0;     // limpa a flag de interrup
+    TMR0 = 0x06;                   // Carrega o valor do tempo 
+    T0IF = 0;                      // limpa a flag de interrup
+
+    if (INTF == 1) {
+
+        minutos++;                // Adiciona o timer em 1 min
+        I2C_Lcd_Out(1, 8, txt6);  // escreve SONECA ZzZ
+        INTF = 0;                 // reinicia Flag de interrupção externa
+        
+    }
 
 }
 

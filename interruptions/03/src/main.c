@@ -1,0 +1,65 @@
+/**
+ * Copyright 2022 felip
+ *
+ * Licensed under the Apache License, Version 2.0 the "License";
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include "functions.h"
+
+// Variaveis
+int count;
+unsigned char horas, minutos, segundos;
+
+// Protótipos das funções;
+void init();
+void registers();
+void setSeconds();
+void setMinutes();
+void setHours();
+void setBuzzer();
+void showDisplay();
+void setCounter();
+void start_pause();
+void clear();
+void setDisplay();
+
+// Functions Prototypes
+void __interrupt() isr(void)
+{
+
+    count++;
+    TMR0 = 0x06; // Carrega o valor do tempo
+    T0IF = 0;    // limpa a flag de interrup
+
+    if (INTF == 1)
+    {
+
+        minutos++; // Adiciona o timer em 1 min
+        INTF = 0;  // reinicia Flag de interrupção externa
+    }
+}
+
+// Main code
+void main()
+{
+
+    registers();
+    init();
+
+    while (1)
+    {
+
+        setDisplay();
+        showDisplay();
+    }
+}

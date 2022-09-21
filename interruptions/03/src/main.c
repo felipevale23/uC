@@ -16,20 +16,22 @@
 
 #include "functions.h"
 
-// Definir endereço I2C do Display LCD
-char LCD_ADDR = 0x4E;
-
 // Variaveis
-char count;
+int count;
+unsigned char horas, minutos, segundos;
 
 // Protótipos das funções;
 void init();
 void registers();
-void setDutyCycle();
-void setFrequency();
+void setSeconds();
+void setMinutes();
+void setHours();
+void setBuzzer();
+void showDisplay();
 void setCounter();
-void setPWM();
-void handleClick();
+void start_pause();
+void clear();
+void setDisplay();
 
 // Functions Prototypes
 void __interrupt() isr(void)
@@ -38,6 +40,13 @@ void __interrupt() isr(void)
     count++;
     TMR0 = 0x06; // Carrega o valor do tempo
     T0IF = 0;    // limpa a flag de interrup
+
+    if (INTF == 1)
+    {
+
+        minutos++; // Adiciona o timer em 1 min
+        INTF = 0;  // reinicia Flag de interrupção externa
+    }
 }
 
 // Main code
@@ -49,6 +58,7 @@ void main()
 
     while (1)
     {
+
         setDisplay();
         showDisplay();
     }

@@ -16,6 +16,7 @@
 
 // CONFIG1
 #pragma config FOSC = XT   // Oscillator Selection bits (HS oscillator: High-speed crystal/resonator on RA6/OSC2/CLKOUT and RA7/OSC1/CLKIN)
+//#pragma config FOSC = INTRC_NOCLKOUT
 #pragma config WDTE = OFF  // Watchdog Timer Enable bit (WDT disabled and can be enabled by SWDTEN bit of the WDTCON register)
 #pragma config PWRTE = ON // Power-up Timer Enable bit (PWRT disabled)
 #pragma config MCLRE = ON  // RE3/MCLR pin function select bit (RE3/MCLR pin function is MCLR)

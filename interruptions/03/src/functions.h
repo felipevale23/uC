@@ -34,7 +34,7 @@ void init()
 
     Lcd_Init();
 
-    Lcd_Set_Cursor(2, 1);
+    Lcd_Set_Cursor(1, 1);
     Lcd_Write_String(txt0);
     __delay_ms(3000);
 }

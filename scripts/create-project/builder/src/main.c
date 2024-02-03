@@ -1,12 +1,12 @@
 /**
  * Copyright 2022 felip
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
+ *
+ * Licensed under the Apache License, Version 2.0 the "License";
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,14 +14,30 @@
  * limitations under the License.
  */
 
-#include "config.h"
-#include "functions.h"
+#include "./lib/functions.h"
 
-//Functions Prototypes
+// Variaveis
 
+// Protótipos das funções;
+void init();
+void registers();
 
-//Main code
-void main (){
+// Functions Prototypes
+void __interrupt() isr(void)
+{
+    // interrptions
+}
 
+// Main code
+void main()
+{
 
+    registers();
+    init();
+
+    while (1)
+    {
+        // Main loop
+        
+    }
 }

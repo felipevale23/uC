@@ -1,4 +1,4 @@
-PHONY. = all proj clean
+PHONY. = all proj clean build
 
 CC = xc8
 
@@ -24,3 +24,7 @@ clean:
 	rm *.rlf
 	rm *.sdb
 	rm *.sym
+
+build:
+	@echo Building 
+	bash ./build.sh

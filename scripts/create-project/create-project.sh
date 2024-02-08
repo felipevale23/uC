@@ -42,6 +42,8 @@ minimal_install () {
 
   echo $INSTALLER_PATH
 
+  mkdir $INSTALLER_PATH
+
   createDirectory && echo -e "\nFolder created!" || echo "Error 🚨" exit
 
   echo "Creating base files...🐢"

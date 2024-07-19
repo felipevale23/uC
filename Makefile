@@ -4,4 +4,8 @@ create:
 	@echo starting uC project creator
 	bash ./scripts/create-project/create-project.sh
 
-.PHONY: create
+install:
+	@echo starting the installer
+	bash ./scripts/xc8-installer/xc8_compiler_installer.sh
+
+.PHONY: create install
